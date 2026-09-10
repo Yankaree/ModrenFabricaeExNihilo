@@ -16,6 +16,7 @@ repositories {
     maven { url "https://maven.saps.dev/minecraft" }
     maven { url "https://maven.bai.lol/" }
     maven { url "https://maven.architectury.dev/" }
+    maven { url "https://maven.quiltmc.org/repository/release" }
     maven {
         url "https://maven.isxander.dev/releases"
         content {
