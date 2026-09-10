@@ -49,6 +49,26 @@ jobs:
           name: build-log
           path: gradle-output.log
 
+      - name: Push log to ci-logs branch
+        if: always()
+        shell: bash
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code origin refs/heads/ci-logs >/dev/null 2>&1; then
+            git fetch origin ci-logs -q
+            git checkout -q -B ci-logs origin/ci-logs
+          else
+            git checkout -q --orphan ci-logs
+            git rm -q -rf --cached . || true
+          fi
+          mkdir -p logs
+          cp gradle-output.log "logs/${{ github.run_id }}.log"
+          git add -f logs
+          git commit -qm "ci log for run ${{ github.run_id }}"
+          git push -q origin ci-logs
+
       - name: Upload artifacts
         if: success()
         uses: actions/upload-artifact@v4
