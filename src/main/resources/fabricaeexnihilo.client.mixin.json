@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "wraith.fabricaeexnihilo.mixins",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "client.BlockModelRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
